@@ -10,7 +10,7 @@ app.controller('myCtrl', function($scope,$http) {
   $scope.dropdown=function(){
 	$http({
         method : "GET",
-        url : "http://localhost:8081/level"+$scope.selectedlevel
+        url : "http://ec2-34-209-125-251.us-west-2.compute.amazonaws.com:6061/level"+$scope.selectedlevel
     }).then(function mySuccess(response) {
         
         var str=response.data;
