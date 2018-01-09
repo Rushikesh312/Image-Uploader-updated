@@ -32,7 +32,7 @@ app.use(multer({
 var con = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "root",
+  password: "system",
   database: "mysql"
   });
 con.connect(function(err) {
