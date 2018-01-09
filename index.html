@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Include files for angularJS, Routing and Jquery -->
+	<script src="/Libs/angular.min.js"></script>
+	<script src="/Libs/app.js"></script>
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/style.css">
+  	<script src="/Libs/jquery-3.2.1.min.js"></script>
+  	<script src="/Libs/bootstrap.min.js"></script>
+<title>Image Assignment</title>
+</head>
+<body>
+	<div ng-app="myApp" ng-controller="myCtrl">
+			<h2>Welcome to Image Gallery</h2>	
+			<br><br>
+			<h5>Select a Level to Display Images:</h5>
+			
+			<select name="selectedlevel" ng-model="selectedlevel" >
+				<option  ng-repeat="x in levels" value="{{x.no}}" ng-click="dropdown()">{{x.model}}
+				</option>
+			</select>
+
+			<div ng-show=flag>
+					<div class="row">
+  						<div class="col-lg-6"><img src="{{temp1}}" alt="Not Available" ></div>
+  						<div class="col-lg-6"><img src="{{temp2}}" alt="Not Available" ></div>
+					</div>
+					
+				<h5>Level selected: {{selectedlevel}}</h5>
+			</div>
+
+			<br><br>
+
+			Do you want to upload Images ??? <input type="checkbox" ng-model="upload">
+
+			<form ng-show=upload action="http://localhost:8081/upload" method="post" enctype="multipart/form-data">
+				<br><br><br>
+					Select Level to Upload Images
+					<select  name="uploadlevel" ng-model="uploadlevel" >
+						<option  ng-repeat="x in levels" value="{{x.no}}">{{x.model}}
+						</option>
+					</select>
+
+					<input class="formelements" name="currlevel" value="{{uploadlevel}}">
+					<input type="file"  class="btn btn-info" name="myfiles" id="myfile" accept="image/bmp, image/jpeg, image/png" multiple><br>
+					<input  type="submit" class="btn btn-success Submit" value="Upload Images" onclick="showalert()" id="fileUpload" name="submit">
+			</form>
+	</div>
+</body>
+</html>
