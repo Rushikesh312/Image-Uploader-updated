@@ -55,22 +55,22 @@ app.post('/upload',  function (req, res, next) {
   if(req.files){
         var number_of_files=req.files.length;
         var LEVEL=req.body.currlevel;        
-        var qcheck="select * from image_db where level="+LEVEL;
+        var qcheck="select * from image_db1 where level="+LEVEL;
         var q,qalter,qupdate;
              
         if(number_of_files==1){
            var file1=req.files[0].filename; 
-           q= "insert into image_db (level,img1) values("+LEVEL+",'"+file1+"'); ";
-           qalter="alter table image_db add img"+col_num+" varchar(1000);"; 
-           qupdate= "update image_db set img"+col_num+"="+"'"+file1+"' "+"where level="+LEVEL;
+           q= "insert into image_db1 (level,img1) values("+LEVEL+",'"+file1+"'); ";
+           qalter="alter table image_db1 add img"+col_num+" varchar(1000);"; 
+           qupdate= "update image_db1 set img"+col_num+"="+"'"+file1+"' "+"where level="+LEVEL;
 
         }
         else if(number_of_files==2){
             var file1=req.files[0].filename;
             var file2=req.files[1].filename;
-            q= "insert into image_db (level,img1,img2) values("+LEVEL+",'"+file1+"','"+file2+"'); ";
-            qalter="alter table image_db add img"+col_num+" varchar(1000) ,"+" add img"+col_num1+" varchar(1000);";
-            qupdate= "update image_db set img"+col_num+"="+"'"+file1+"',"+"img"+col_num1+"="+" '"+file2+"' "+"where level="+LEVEL;
+            q= "insert into image_db1 (level,img1,img2) values("+LEVEL+",'"+file1+"','"+file2+"'); ";
+            qalter="alter table image_db1 add img"+col_num+" varchar(1000) ,"+" add img"+col_num1+" varchar(1000);";
+            qupdate= "update image_db1 set img"+col_num+"="+"'"+file1+"',"+"img"+col_num1+"="+" '"+file2+"' "+"where level="+LEVEL;
          }
             con.query(qcheck,function(err,result){
                 
@@ -102,8 +102,8 @@ app.post('/upload',  function (req, res, next) {
 //setting path for serving images with respect to level
 app.get('/level:selectedlevel', function (req, res) {
     var data=req.params;
-    var q1 = "select img1 from image_db where level ="+ data.selectedlevel;
-    var q2 = "select img2 from image_db where level ="+data.selectedlevel;
+    var q1 = "select img1 from image_db1 where level ="+ data.selectedlevel;
+    var q2 = "select img2 from image_db1 where level ="+data.selectedlevel;
     var totalResult;
     con.query(q1,function(err,result){
               var result=JSON.stringify(result);
